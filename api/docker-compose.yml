@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: bitly_db
+      POSTGRES_USER: bitly_admin
+      POSTGRES_PASSWORD: Hihihi123@
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+  nestjs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: bitly
+    command: npm run start:dev
+    ports:
+      - 2001:2001
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - db_network
+
+volumes:
+  postgres_data:
+
+networks:
+  db_network:
