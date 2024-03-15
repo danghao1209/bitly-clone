@@ -36,6 +36,7 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile.dev
+    container_name: app-bitly
     ports:
       - "3000:3000"
     volumes:
