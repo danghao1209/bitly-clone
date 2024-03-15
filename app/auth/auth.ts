@@ -28,7 +28,7 @@ const authOptions: NextAuthOptions = {
       return token;
     },
     async redirect({ baseUrl }): Promise<string> {
-      return `${baseUrl}/a/sign_in`;
+      return `${baseUrl}/`;
     },
     session: async ({ session, token, user }) => {
       return { ...session, token: token.accessToken };

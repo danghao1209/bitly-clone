@@ -1,11 +1,10 @@
 "use client";
 import { SessionProvider } from "next-auth/react";
-import { NextUIProvider } from "@nextui-org/react";
-
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SessionProvider>
-      <NextUIProvider>{children}</NextUIProvider>
+      <AntdRegistry>{children}</AntdRegistry>
     </SessionProvider>
   );
 }

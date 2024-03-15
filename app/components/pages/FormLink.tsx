@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Button, Input } from "@nextui-org/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Button, Input } from "antd";
+import FooterForm from "./FooterForm";
 
 const schema = yup
   .object({
@@ -31,7 +32,7 @@ export default function FormLink() {
 
   const onSubmit: SubmitHandler<FormFields> = (data) => console.log(data);
   return (
-    <div>
+    <div className="border-[2px] rounded-[16px] border-[#e8e9eb] py-[30px] px-[40px] bg-[#fff]">
       <div className="pb-[20px]">
         <p className="text-[30px] text-[#2a2e30] font-extrabold leading-[32px]">
           Shorten a long link
@@ -43,8 +44,8 @@ export default function FormLink() {
           <label className="text-[18px] font-semibold">Paste a long URL</label>
           <Input
             {...register("longURL")}
-            size="lg"
-            variant="bordered"
+            size="large"
+            variant="outlined"
             className="mt-[8px]"
           />
           {errors.longURL && (
@@ -56,9 +57,9 @@ export default function FormLink() {
             <label className="text-[18px] font-semibold">Domain</label>
             <Input
               value={"bit.ly"}
-              isDisabled={true}
-              size="lg"
-              variant="bordered"
+              disabled={true}
+              size="large"
+              variant="outlined"
             />
           </div>
           <div className="w-[5%] flex justify-center items-center">
@@ -68,7 +69,7 @@ export default function FormLink() {
             <label className="text-[18px] font-semibold">
               Enter a back-half (optional)
             </label>
-            <Input {...register("backHalf")} size="lg" variant="bordered" />
+            <Input {...register("backHalf")} size="large" variant="outlined" />
             {errors.backHalf && (
               <div className="text-red-500">{errors.backHalf.message}</div>
             )}
@@ -76,11 +77,12 @@ export default function FormLink() {
         </div>
         <div></div>
         <div className="w-full flex justify-center">
-          <Button className="" type="submit" color="primary" size="lg">
+          <Button className="" type="primary" color="primary" size="large">
             Sign up and get your link
           </Button>
         </div>
       </form>
+      <FooterForm />
     </div>
   );
 }

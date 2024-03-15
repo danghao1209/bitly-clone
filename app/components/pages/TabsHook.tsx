@@ -1,21 +1,19 @@
 import React from "react";
-import {
-  Tabs,
-  Tab,
-  Card,
-  CardBody,
-  CardHeader,
-  Image,
-} from "@nextui-org/react";
 import FormLink from "./FormLink";
-
+import FormQR from "./FormQR";
+import { Tabs } from "antd";
+import { Image } from "antd";
 export default function TabsHook() {
+  const onChange = (key: string) => {
+    console.log(key);
+  };
+
   let tabs = [
     {
       id: "links",
       label: (
         <div className="flex items-center space-x-2">
-          <Image src="svgexport-6.svg" alt="linkIcon" />
+          <Image src="svgexport-6.svg" alt="linkIcon" preview={false} />
           <span className="text-[20px]">Links</span>
         </div>
       ),
@@ -25,48 +23,27 @@ export default function TabsHook() {
       id: "qr",
       label: (
         <div className="flex items-center space-x-2">
-          <Image src="svgexport-7.svg" alt="linkIcon" />
+          <Image src="svgexport-7.svg" alt="linkIcon" preview={false} />
           <span className="text-[20px]">QR</span>
         </div>
       ),
-      content:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      content: <FormQR />,
     },
   ];
 
   return (
-    <div className="flex w-full flex-col">
+    <div>
       <Tabs
-        aria-label="Dynamic tabs"
-        items={tabs}
-        color="default"
-        className="flex justify-center "
-      >
-        {(item) => (
-          <Tab key={item.id} title={item.label} className="px-[52px] py-[30px]">
-            <Card className="px-[40px] py-[30px]">
-              <CardBody>{item.content}</CardBody>
-              <div className="text-[20px] leading-[22px] flex flex-col justify-center items-center mt-[10px]">
-                <p>
-                  <strong>
-                    No credit card required. Your free plan includes:
-                  </strong>
-                </p>
-                <ul className="flex mt-[10px] list-none">
-                  <li className="flex justify-center items-center px-[10px]">
-                    <Image src="svgexport-10.svg" alt="" />
-                    Short links
-                  </li>
-                  <li className="flex justify-center items-center px-[10px]">
-                    <Image src="svgexport-10.svg" alt="" />
-                    QR Codes
-                  </li>
-                </ul>
-              </div>
-            </Card>
-          </Tab>
-        )}
-      </Tabs>
+        onChange={onChange}
+        type="card"
+        items={tabs.map((item, i) => ({
+          label: item.label,
+          key: i.toString(),
+          children: item.content,
+          style: { marginBottom: 0 },
+        }))}
+        centered
+      />
     </div>
   );
 }
