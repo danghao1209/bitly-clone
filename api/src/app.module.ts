@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ShortlinkModule } from './shortlink/shortlink.module';
+import { QrModule } from './qr/qr.module';
+import { UpgradeModule } from './upgrade/upgrade.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
@@ -21,6 +24,9 @@ import { UserModule } from './user/user.module';
     }),
     AuthModule,
     UserModule,
+    ShortlinkModule,
+    QrModule,
+    UpgradeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
